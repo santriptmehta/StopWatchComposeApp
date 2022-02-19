@@ -23,11 +23,11 @@ class StopWatch {
         coroutineScope.launch {
             lastTimeTamp = System.currentTimeMillis()
             this@StopWatch.isActive = true
-            while (isActive){
+            while (this@StopWatch.isActive){
                 delay(10L)
-                timeMillis += System.currentTimeMillis()-lastTimeTamp
+                timeMillis += System.currentTimeMillis() - lastTimeTamp
                 lastTimeTamp = System.currentTimeMillis()
-                formattedTime = formateTime(timeMillis)
+                formattedTime = formatTime(timeMillis)
             }
         }
     }
@@ -44,13 +44,13 @@ class StopWatch {
         isActive = false
 
     }
-    private fun formateTime(timeMillie:Long):String{
+    private fun formatTime(timeMillie:Long):String{
         val localDateTime = LocalDateTime.ofInstant(
             Instant.ofEpochMilli(timeMillie),
             ZoneId.systemDefault()
         )
         val formatter = DateTimeFormatter.ofPattern(
-            "MM:SS:sss",
+            "mm:ss:SSS",
             Locale.getDefault()
         )
         return localDateTime.format(formatter)
